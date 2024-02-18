@@ -33,36 +33,6 @@ class ShoppingCartCheckoutServiceImplTest {
     }
 
     @Test
-    public void testCalculateWithDiscountForNullInput() {
-        String[] requestItems = null;
-        Exception exception = assertThrows(BadRequestEception.class, () -> {
-            checkoutService.calculateTotalPriceForCheckout(requestItems);
-        });
-
-        String expectedMessage = "Supplied list of items is either null or empty.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-
-
-    }
-
-    @Test
-    public void testCalculateWithDiscountForEmptyInput() {
-        String[] requestItems = {};
-        Exception exception = assertThrows(BadRequestEception.class, () -> {
-            checkoutService.calculateTotalPriceForCheckout(requestItems);
-        });
-
-        String expectedMessage = "Supplied list of items is either null or empty.";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-
-
-    }
-
-    @Test
     public void testCalculateWithDiscountForImnvalidInput() {
         String[] requestItems = {"001", "002", "abcdefgh", "004", "anyInput", "002", "003","001", "002"};
         Exception exception = assertThrows(BadRequestEception.class, () -> {

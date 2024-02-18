@@ -50,7 +50,10 @@ public class ShoppingCartApi {
 
             })
     public ResponseEntity<Integer> fetchTotalCostForCart(@RequestParam(value = "items[]") String[] items) {
-
+        if (items == null || Arrays.asList(items).isEmpty()) {
+            log.warn("Empty or null input");
+            return ResponseEntity.ok(0);
+        }
         logRequest(HttpMethod.GET, "fetchTotalCostForCart", items);
 
         Integer totalCost = checkoutService.calculateTotalPriceForCheckout(items);

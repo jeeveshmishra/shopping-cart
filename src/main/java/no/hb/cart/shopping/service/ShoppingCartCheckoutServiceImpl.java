@@ -57,10 +57,7 @@ public class ShoppingCartCheckoutServiceImpl implements ShoppingCartCheckoutServ
     }
 
     private void validate(String[] items) {
-        if (items == null || Arrays.asList(items).isEmpty()) {
-            log.error("Empty or null input");
-            throw new BadRequestEception("Supplied list of items is either null or empty.");
-        }
+
 
         List<String> existingWatchIds = watchCatalogRepository.findAllWatchIds();
         List<String> itemsList = Arrays.asList(items);
