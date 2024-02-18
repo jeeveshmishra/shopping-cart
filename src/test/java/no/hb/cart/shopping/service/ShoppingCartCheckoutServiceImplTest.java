@@ -16,12 +16,6 @@ class ShoppingCartCheckoutServiceImplTest {
     @Autowired
     private ShoppingCartCheckoutService checkoutService;
 
-  /* @BeforeAll
-   @Sql({ "/static/sql/insert_data.sql"})
-   public static void setUp() {}
-
-   */
-
     @Test
     public void testCalculateForNormalPrice() {
         List<String> requestItems = Arrays.asList("001", "002", "003", "004");
