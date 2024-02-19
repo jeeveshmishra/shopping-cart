@@ -73,8 +73,6 @@ Content-Type: application/json
 
 # 3. Software Architecture
 
-# System-Arkitetktur
-
 
 ## Flow Diagram
 
