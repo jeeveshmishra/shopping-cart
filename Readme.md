@@ -24,13 +24,13 @@ Below is a catalogue of four watches and their associated prices:
 
 
 There are a few requirements worth noting here:
-● The first two products have a possible discount. As an example, if the user attempts
+1. The first two products have a possible discount. As an example, if the user attempts
 to check out three or six Rolex watches then they will receive the discount price once
-or twice, respectively.
-● There is no limit to the number of items or combinations of watches a user
+or twice, respectively. 
+2. There is no limit to the number of items or combinations of watches a user
 can checkout.
-● There is no limit to the number of times a discount can be used.
-● Similarly, a user can checkout a single item if they wish.
+3. There is no limit to the number of times a discount can be used.
+4. Similarly, a user can checkout a single item if they wish.
 
 Endpoint reference
 As a further guideline here's an endpoint definition that you can use to design your API endpoint.
@@ -64,10 +64,19 @@ Content-Type: application/json
 1. Please make sure you have Java 21 and is set as JAVA_HOME. You shall also have Maven 3.5 or over. On mac include following line within your .bash_profile:
    export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home
    export MAVEN_HOME=/Users/jeeveshmishra/apache-maven-3.5.0/bin
-2. Ypu shall have either Docker or Kolima installed on your mac.
+2. You shall have either Docker or Kolima installed on your mac.
 3. Then run command from your home folder: source ~/.bash_profile
-4. Build project using command mvn clean install.
-5. From command line run $ mvn spring-boot:run to run the application locally.
+4. Build project from command line using command 
+```shell 
+./mvn clean install 
+```
+ from the project root folder.
+5. At command line from root folder we can run 
+```shell 
+./mvn spring-boot:run 
+```
+
+to run the application locally.
 6. Swagger is accessible at URL: http://localhost:8080/swagger-ui/index.html#
 
 
@@ -94,9 +103,9 @@ sequenceDiagram
 
 # 4. Deployment
 
-Ideally I prefer the Github actions as its more declarative and concise than what we use in internal applications if HB (Jenkins).
+Ideally I prefer the Github actions as its more declarative , with good documentation and concise to make CI/CD flows in comparison to what we use in internal applications if HB (Jenkins).
 
-I would like to deploy it on Azure paltform using github actions.
+I would like to deploy it on Azure paltform using terraforms if the ecosystem is supported.
 
 # 5. Swagger
 
