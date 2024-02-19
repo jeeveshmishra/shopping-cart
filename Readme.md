@@ -82,8 +82,7 @@ to run the application locally.
 
 # 3. Software Architecture
 
-
-## Flow Diagram
+# Flow Diagram
 
 ```mermaid
 
