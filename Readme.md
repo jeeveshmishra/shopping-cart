@@ -3,7 +3,7 @@
 # Contents Overview
 * [1. Functional requirements](#1-functional-requirements)
 * [2. Development environment](#2-development-environment)
-* [3. Software Architecture](#3-software-architecture)
+* [3. Flow Diagram](#3-flow-diagram)
 * [4. Deployment](#4-deployment)
 * [5. Swagger](#5-swagger)
 ---
@@ -81,9 +81,7 @@ to run the application locally.
 6. Swagger is accessible at URL: http://localhost:8080/swagger-ui/index.html#
 
 
-# 3. Software Architecture
-
-# Flow Diagram
+# 3. Flow Diagram
 
 ```mermaid
 
