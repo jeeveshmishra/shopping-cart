@@ -3,12 +3,12 @@
 # Contents Overview
 * [1. Functional requirements](#1-functional-requirements)
 * [2. Development environment](#2-development-environment)
-* [3. Software Architecture](#3-Software-Architecture)
+* [3. Software Architecture](#3-software-architecture)
 * [4. Deployment](#4-deployment)
-* [5. Swagger](#6-swagger)
+* [5. Swagger](#5-swagger)
 ---
 
-# 1. Functional Requirements:  
+# 1.Functional Requirements:  
 Build a simple e-commerce application with a single endpoint that performs a checkout action.
 The single endpoint should take a list of watches and return the total cost. The solution is made in Java.
 
@@ -36,10 +36,10 @@ Endpoint reference
 As a further guideline here's an endpoint definition that you can use to design your API endpoint.
 Request
 POST http://localhost:8080/checkout
-# Headers
+### Headers
 Accept: application/json
 Content-Type: application/json
-# Body
+### Body
 [
 "001",
 "002",
@@ -50,7 +50,7 @@ Content-Type: application/json
 Response
 ### Headers
 Content-Type: application/json
-# Body
+### Body
 { "price": 360 }
 
 # 2. Development Environment  
@@ -59,6 +59,17 @@ Content-Type: application/json
 ### Java - JDK21.
 ### Maven - Maven 3.5
 ### Latest versions of Docker desktop or Kolima.
+
+## Build and run project locally
+1. Please make sure you have Java 21 and is set as JAVA_HOME. You shall also have Maven 3.5 or over. On mac include following line within your .bash_profile:
+   export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home
+   export MAVEN_HOME=/Users/jeeveshmishra/apache-maven-3.5.0/bin
+2. Ypu shall have either Docker or Kolima installed on your mac.
+3. Then run command from your home folder: source ~/.bash_profile
+4. Build project using command mvn clean install.
+5. From command line run $ mvn spring-boot:run to run the application locally.
+6. Swagger is accessible at URL: http://localhost:8080/swagger-ui/index.html#
+
 
 # 3. Software Architecture
 
@@ -82,3 +93,13 @@ sequenceDiagram
     
     
 ```
+
+# 4. Deployment
+
+Ideally I prefer the Github actions as its more declarative and concise than what we use in internal applications if HB (Jenkins).
+
+I would like to deploy it on Azure paltform using github actions.
+
+# 5. Swagger
+
+Swagger is accessible at URL: http://localhost:8080/swagger-ui/index.html#
