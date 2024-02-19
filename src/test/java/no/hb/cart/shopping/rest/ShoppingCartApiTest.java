@@ -1,7 +1,6 @@
 package no.hb.cart.shopping.rest;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import no.hb.cart.shopping.contract.CheckoutResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +9,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,9 +24,9 @@ class ShoppingCartApiTest {
     @Test
     public void testController() throws Exception {
 
-        ResponseEntity<Integer> response = restTemplate.getForEntity(
-                new URL("http://localhost:" + port + "/shop/checkout/cart?items[]=").toString(), Integer.class);
-        assertEquals(0, response.getBody());
+        ResponseEntity<CheckoutResponse> response = restTemplate.postForEntity(
+                new URL("http://localhost:" + port + "/checkout").toString(), new ArrayList<String>(),  CheckoutResponse.class);
+        assertEquals(new CheckoutResponse(0).getPrice(), response.getBody().getPrice());
 
     }
 }

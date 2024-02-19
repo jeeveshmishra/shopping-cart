@@ -2,7 +2,6 @@ package no.hb.cart.shopping.service;
 
 import lombok.extern.slf4j.Slf4j;
 import no.hb.cart.shopping.db.entity.WatchCatalog;
-import no.hb.cart.shopping.db.entity.WatchCatalogDiscount;
 import no.hb.cart.shopping.db.repo.WatchCatalogDiscountRepository;
 import no.hb.cart.shopping.db.repo.WatchCatalogRepository;
 import no.hb.cart.shopping.exception.BadRequestEception;
@@ -23,15 +22,11 @@ public class ShoppingCartCheckoutServiceImpl implements ShoppingCartCheckoutServ
     @Autowired
     WatchCatalogDiscountRepository watchCatalogDiscountRepository;
 
-    @Override
-    public Integer calculateTotalPriceForCheckout(String[] items) {
-        validate(items);
-        return calculateTotalPriceForCheckout(Arrays.asList(items));
-    }
+
 
     @Override
     public Integer calculateTotalPriceForCheckout(List<String> items) {
-
+        validate(items);
         Set<WatchItemWithCount> watchItemsWithCount = new HashSet<>();
         items.forEach(item -> {
             WatchCatalog watchCatalogItem = watchCatalogRepository.findItemByWatchId(item);
@@ -56,13 +51,12 @@ public class ShoppingCartCheckoutServiceImpl implements ShoppingCartCheckoutServ
         return totalPrice;
     }
 
-    private void validate(String[] items) {
+    private void validate(List<String> items) {
 
 
         List<String> existingWatchIds = watchCatalogRepository.findAllWatchIds();
-        List<String> itemsList = Arrays.asList(items);
 
-        boolean isValid = ValidationsUtil.validate(itemsList, existingWatchIds);
+        boolean isValid = ValidationsUtil.validate(items, existingWatchIds);
 
         if (!isValid) {
             log.error("Bad or Invalid elements within the input");

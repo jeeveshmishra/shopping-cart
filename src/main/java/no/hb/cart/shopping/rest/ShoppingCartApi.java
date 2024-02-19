@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import no.hb.cart.shopping.contract.CheckoutResponse;
 import no.hb.cart.shopping.db.repo.WatchCatalogRepository;
 import no.hb.cart.shopping.exception.BadRequestEception;
 import no.hb.cart.shopping.service.ShoppingCartCheckoutService;
@@ -13,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +31,7 @@ public class ShoppingCartApi {
     @Autowired
     WatchCatalogRepository watchCatalogRepository;
 
-    @GetMapping(value = "/shop/checkout/cart", produces = "application/json")
+    @PostMapping(value = "/checkout", produces = "application/json")
     @Operation(
             summary = "This method takes list of watch ids like : 001, 002, 003 etc.. " +
                     "and applies discounts if any as per business rule then calculates and returns total cost.",
@@ -49,18 +47,18 @@ public class ShoppingCartApi {
                             content = @Content)
 
             })
-    public ResponseEntity<Integer> fetchTotalCostForCart(@RequestParam(value = "items[]") String[] items) {
-        if (items == null || Arrays.asList(items).isEmpty()) {
+    public ResponseEntity<CheckoutResponse> fetchTotalCostForCart(@RequestBody List<String> items) {
+        if (items == null || items.isEmpty()) {
             log.warn("Empty or null input");
-            return ResponseEntity.ok(0);
+            return ResponseEntity.ok(new CheckoutResponse(0));
         }
-        logRequest(HttpMethod.GET, "fetchTotalCostForCart", items);
+        logRequest(HttpMethod.POST, "fetchTotalCostForCart", items);
 
         Integer totalCost = checkoutService.calculateTotalPriceForCheckout(items);
 
-        logResponse(HttpMethod.GET, HttpStatus.OK, "fetchTotalCostForCart", String.format("Total cost of shopping cart is: %d", totalCost));
+        logResponse(HttpMethod.POST, HttpStatus.OK, "fetchTotalCostForCart", String.format("Total cost of shopping cart is: %d", totalCost));
 
-        return ResponseEntity.ok(totalCost);
+        return ResponseEntity.ok(new CheckoutResponse(totalCost));
     }
 
 

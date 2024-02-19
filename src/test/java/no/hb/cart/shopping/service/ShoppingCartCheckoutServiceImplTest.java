@@ -21,12 +21,6 @@ class ShoppingCartCheckoutServiceImplTest {
     @Autowired
     private ShoppingCartCheckoutService checkoutService;
 
-    @AfterEach
-    @Sql({"/static/sql/delete.sql"})
-    public void tearDown() {
-        System.out.println("$$$$$$$ TEAR DOWN EXECUTED $$$$$$$");
-    }
-
     @Test
     @Sql({"/static/sql/insert_data.sql"})
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
@@ -51,7 +45,7 @@ class ShoppingCartCheckoutServiceImplTest {
     @Sql({"/static/sql/insert_data.sql"})
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void testCalculateWithDiscountForImnvalidInput() {
-        String[] requestItems = {"001", "002", "abcdefgh", "004", "anyInput", "002", "003","001", "002"};
+        List<String> requestItems = Arrays.asList("001", "002", "abcdefgh", "004", "anyInput", "002", "003","001", "002");
         Exception exception = assertThrows(BadRequestEception.class, () -> {
             checkoutService.calculateTotalPriceForCheckout(requestItems);
         });

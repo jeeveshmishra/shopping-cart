@@ -2,10 +2,83 @@
 
 # Contents Overview
 * [1. Functional requirements](#1-functional-requirements)
-* [2. Development environment](#2 development environment)
-* [3. Software Architecture](#3 Software Architecture)
+* [2. Development environment](#2-development-environment)
+* [3. Software Architecture](#3-Software-Architecture)
 * [4. Deployment](#4-deployment)
-* [5. Operation and support](#5-operation-and-support)
-* [6. Swagger](#6-swagger)
-* [7. Henvendelser](#7-henvendelser)
+* [5. Swagger](#6-swagger)
 ---
+
+# 1. Functional Requirements:  
+Build a simple e-commerce application with a single endpoint that performs a checkout action.
+The single endpoint should take a list of watches and return the total cost. The solution is made in Java.
+
+Watch catalogue
+Below is a catalogue of four watches and their associated prices:
+
+|Watch ID| Watch Name   | Unit price | Discount |
+|---|---|------------|----------|
+| 001  | Rolex  | 100           |     3 for 200     |
+| 002  | Michael Kors  | 80           |     2 for 120     |
+| 003  | Swatch  |   50         |          |
+| 004  | Casio  |    30        |          |
+
+
+There are a few requirements worth noting here:
+● The first two products have a possible discount. As an example, if the user attempts
+to check out three or six Rolex watches then they will receive the discount price once
+or twice, respectively.
+● There is no limit to the number of items or combinations of watches a user
+can checkout.
+● There is no limit to the number of times a discount can be used.
+● Similarly, a user can checkout a single item if they wish.
+
+Endpoint reference
+As a further guideline here's an endpoint definition that you can use to design your API endpoint.
+Request
+POST http://localhost:8080/checkout
+# Headers
+Accept: application/json
+Content-Type: application/json
+# Body
+[
+"001",
+"002",
+"001",
+"004",
+"003"
+]
+Response
+### Headers
+Content-Type: application/json
+# Body
+{ "price": 360 }
+
+# 2. Development Environment  
+# Prerequisites
+
+### Java - JDK21.
+### Maven - Maven 3.5
+### Latest versions of Docker desktop or Kolima.
+
+# 3. Software Architecture
+
+# System-Arkitetktur
+
+
+## Flow Diagram
+
+```mermaid
+
+sequenceDiagram
+    
+    Controller->>Service: calculateTotalPriceForCheckout
+    Service-->>DBRepo: findAllWatchIds
+    DBRepo -->>Database: getListOfAllWatchIds
+    Database -->> DBRepo: getListOfAllWatchIds
+    DBRepo->>Service: findAllWatchIds
+    Service-->>Service: validate
+    Service-->>DBRepo: findItemByWatchId
+    DBRepo->>Service: findItemByWatchId
+    
+    
+```
