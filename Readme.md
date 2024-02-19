@@ -8,7 +8,7 @@
 * [5. Swagger](#5-swagger)
 ---
 
-# 1.Functional Requirements:  
+# 1. Functional requirements
 Build a simple e-commerce application with a single endpoint that performs a checkout action.
 The single endpoint should take a list of watches and return the total cost. The solution is made in Java.
 
@@ -36,10 +36,10 @@ Endpoint reference
 As a further guideline here's an endpoint definition that you can use to design your API endpoint.
 Request
 POST http://localhost:8080/checkout
-### Headers
+### Request Headers
 Accept: application/json
 Content-Type: application/json
-### Body
+### Request Body
 [
 "001",
 "002",
@@ -48,9 +48,9 @@ Content-Type: application/json
 "003"
 ]
 Response
-### Headers
+### Response Headers
 Content-Type: application/json
-### Body
+### Response Body
 { "price": 360 }
 
 # 2. Development Environment  
@@ -70,13 +70,14 @@ Content-Type: application/json
 ```shell 
 ./mvn clean install 
 ```
- from the project root folder.
+from the project root folder.
+
 5. At command line from root folder we can run 
 ```shell 
 ./mvn spring-boot:run 
 ```
-
 to run the application locally.
+
 6. Swagger is accessible at URL: http://localhost:8080/swagger-ui/index.html#
 
 
